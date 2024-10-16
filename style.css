@@ -38,7 +38,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  margin: 10px 0;
+  margin: 15px 0;
   position: relative;
 }
 .input-group label {
@@ -72,10 +72,16 @@ form button {
 }
 .input-group span {
   position: absolute;
-  right: 17px;
-  bottom: 12px;
+  right: 18px;
+  bottom: -17px;
   color: red;
+  font-size: 13px;
 }
 .input-group span i {
   color: green;
+}
+.password-view {
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
 }

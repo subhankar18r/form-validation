@@ -60,3 +60,15 @@ function validatePassword() {
   passwordError.innerHTML = `<i class="fa-solid fa-circle-check"></i>`;
   return true;
 }
+function hideAndShowPassword(e) {
+  let password = document.querySelector("#password");
+  let passwordView = document.querySelector(".password-view");
+
+  if (password.type === "password") {
+    password.type = "text";
+    passwordView.src = "./icons/view-off-stroke-rounded.svg";
+  } else {
+    password.type = "password";
+    passwordView.src = "./icons/view-stroke-rounded.svg";
+  }
+}
