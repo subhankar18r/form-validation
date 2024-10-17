@@ -3,6 +3,7 @@ const passwordError = document.querySelector("#password_error");
 const emailError = document.querySelector("#email_error");
 const phoneError = document.querySelector("#phone_error");
 const nameError = document.querySelector("#name_error");
+const loading = document.querySelector("#loading");
 
 function submitForm(e) {
   e.preventDefault();
@@ -13,16 +14,29 @@ function submitForm(e) {
     validatePassword(),
   ];
   if (isNameValid && isPhoneValid && isEmailValid && isPasswordValid) {
+    loading.style.display = "block";
+    form.querySelector("button").disabled = true;
+    form.classList.add("loading");
+
     const scriptURL =
-      "https://script.google.com/macros/s/AKfycbxW6gt-xJkvaftHUDLN-lOtwWB8gPZlBGiJQJmRYO3FVW6ZwDodlHwNenBcP-5zOsqh/exec";
+      "https://script.google.com/macros/s/AKfycbzz5gpxPlS0mUtiPAPAYSTYN829BuEVVMjytM4axZMRHiLnGwDrNubP53esu94ck3Ln/exec";
 
     fetch(scriptURL, { method: "POST", body: new FormData(form) })
       .then((response) => {
         form.style.display = "none";
         document.querySelector(".submision-popup").classList.add("active");
         console.log(response);
+        loading.style.display = "none";
       })
-      .catch((error) => console.error("Error!", error.message));
+      .catch((error) => {
+        loading.style.display = "none";
+        console.log(error);
+      })
+      .finally(() => {
+        loading.style.display = "none";
+        form.querySelector("button").disabled = false;
+        form.classList.remove("loading");
+      });
   }
 }
 

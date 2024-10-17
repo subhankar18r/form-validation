@@ -47,6 +47,14 @@
   align-items: center;
   justify-content: center;
 }
+#loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  z-index: 9;
+}
 
 .container form {
   width: 90vw;
@@ -56,6 +64,9 @@
   border-radius: 4px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
   position: relative;
+}
+.container form.loading {
+  opacity: 0.5;
 }
 .fa-paper-plane {
   position: absolute;
