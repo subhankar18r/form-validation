@@ -11,8 +11,19 @@
   </head>
   <body>
     <div class="container">
+      <div class="submision-popup">
+        <div>
+          <img src="./icons/checkmark-circle-02-stroke-rounded.svg" />
+          <h2>your form is submitted</h2>
+        </div>
+
+        <button onclick="submitAgain()">Submit another</button>
+      </div>
       <form>
         <i class="fas fa-paper-plane"></i>
+        <h2 class="form-heading">
+          When you submit the form i will get your data in my Google Sheet
+        </h2>
 
         <div class="input-group">
           <label>Full Name</label>
@@ -20,6 +31,7 @@
             type="text"
             placeholder="Enter your name"
             id="name"
+            name="Name"
             onkeyup="validateName()"
           />
           <span id="name_error"></span>
@@ -32,6 +44,7 @@
             maxlength="10"
             placeholder="123 456 7890"
             id="phone"
+            name="Mobile"
             onkeyup="validatePhone()"
           />
           <span id="phone_error"></span>
@@ -43,6 +56,7 @@
             type="email"
             placeholder="Enter Email"
             id="email"
+            name="Email"
             onkeyup="validateEmail()"
           />
           <span id="email_error"></span>
@@ -54,6 +68,7 @@
             type="password"
             placeholder="Enter password"
             id="password"
+            name="Password"
             onkeyup="validatePassword()"
           />
           <span id="password_error"></span>
@@ -65,7 +80,7 @@
           />
         </div>
 
-        <button onclick="submitForm(event)">Sign up</button>
+        <button onclick="submitForm(event)">Submit</button>
       </form>
     </div>
     <script src="./script.js"></script>

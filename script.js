@@ -1,3 +1,9 @@
+const form = document.querySelector("form");
+const passwordError = document.querySelector("#password_error");
+const emailError = document.querySelector("#email_error");
+const phoneError = document.querySelector("#phone_error");
+const nameError = document.querySelector("#name_error");
+
 function submitForm(e) {
   e.preventDefault();
   const [isNameValid, isPhoneValid, isEmailValid, isPasswordValid] = [
@@ -7,11 +13,28 @@ function submitForm(e) {
     validatePassword(),
   ];
   if (isNameValid && isPhoneValid && isEmailValid && isPasswordValid) {
-    console.log("form submitted");
+    const scriptURL =
+      "https://script.google.com/macros/s/AKfycbxW6gt-xJkvaftHUDLN-lOtwWB8gPZlBGiJQJmRYO3FVW6ZwDodlHwNenBcP-5zOsqh/exec";
+
+    fetch(scriptURL, { method: "POST", body: new FormData(form) })
+      .then((response) => {
+        form.style.display = "none";
+        document.querySelector(".submision-popup").classList.add("active");
+        console.log(response);
+      })
+      .catch((error) => console.error("Error!", error.message));
   }
 }
 
-const nameError = document.querySelector("#name_error");
+function submitAgain() {
+  form.style.display = "block";
+  form.reset();
+  document.querySelector(".submision-popup").classList.remove("active");
+  nameError.innerHTML = "";
+  phoneError.innerHTML = "";
+  passwordError.innerHTML = "";
+  emailError.innerHTML = "";
+}
 function validateName() {
   let name = document.querySelector("#name").value;
   if (name.length === 0) {
@@ -27,7 +50,6 @@ function validateName() {
   return true;
 }
 
-const phoneError = document.querySelector("#phone_error");
 function validatePhone() {
   let phone = document.querySelector("#phone").value;
   if (!phone.match(/^\d{10}/)) {
@@ -39,7 +61,6 @@ function validatePhone() {
   return true;
 }
 
-const emailError = document.querySelector("#email_error");
 function validateEmail() {
   let email = document.querySelector("#email").value;
   if (!email.match(/^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
@@ -50,7 +71,6 @@ function validateEmail() {
   return true;
 }
 
-const passwordError = document.querySelector("#password_error");
 function validatePassword() {
   let password = document.querySelector("#password").value;
   if (password.length < 8) {
